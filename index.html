@@ -11,12 +11,14 @@
 
 <body>
     <video id="preview"></video>
+    <ul id="list"></ul>
     <script type="text/javascript">
         let scanner = new Instascan.Scanner({
             video: document.getElementById('preview')
         });
         scanner.addListener('scan', function (content) {
             console.log(content);
+            document.getElementById('list').append("<li>" + content + "</li>")
         });
         Instascan.Camera.getCameras().then(function (cameras) {
             if (cameras.length > 0) {
