@@ -10,16 +10,23 @@
 </head>
 
 <body>
+    <button id="getbutton" onclick="myFunction()">Copy codes</button>
     <video id="preview"></video>
     <ul id="list"></ul>
     <script type="text/javascript">
+        let codes = [];
         let scanner = new Instascan.Scanner({
             video: document.getElementById('preview')
         });
         scanner.addListener('scan', function (content) {
             console.log(content);
-            let exist = document.getElementById('list').innerHTML
-            document.getElementById('list').innerHTML = exist + "<li>" + content + "</li>"
+            if (codes.indexOf(content) >= 0) {
+                codes.push(content);
+                let exist = document.getElementById('list').innerHTML
+                document.getElementById('getbutton').innerHTML = "Copy " + codes.length + " codes"
+                document.getElementById('list').innerHTML = exist + "<li>" + content + "</li>"
+            }
+            console.log(codes)
         });
         Instascan.Camera.getCameras().then(function (cameras) {
             if (cameras.length > 0) {
@@ -30,6 +37,10 @@
         }).catch(function (e) {
             console.error(e);
         });
+        function myFunction() {
+            codes.select();
+            document.execCommand("copy");
+        }
     </script>
 </body>
 
