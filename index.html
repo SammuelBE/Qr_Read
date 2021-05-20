@@ -38,8 +38,12 @@
             console.error(e);
         });
         function myFunction() {
-            codes.select();
+            var dummy = document.createElement("textarea");
+            document.body.appendChild(dummy);
+            dummy.value = codes;
+            dummy.select();
             document.execCommand("copy");
+            document.body.removeChild(dummy);
         }
     </script>
 </body>
