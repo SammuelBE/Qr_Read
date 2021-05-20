@@ -20,7 +20,7 @@
         });
         scanner.addListener('scan', function (content) {
             console.log(content);
-            if (codes.indexOf(content) >= 0) {
+            if (codes.indexOf(content) == -1) {
                 codes.push(content);
                 let exist = document.getElementById('list').innerHTML
                 document.getElementById('getbutton').innerHTML = "Copy " + codes.length + " codes"
@@ -40,7 +40,7 @@
         function myFunction() {
             var dummy = document.createElement("textarea");
             document.body.appendChild(dummy);
-            dummy.value = codes;
+            dummy.value = codes.join('\n');
             dummy.select();
             document.execCommand("copy");
             document.body.removeChild(dummy);
